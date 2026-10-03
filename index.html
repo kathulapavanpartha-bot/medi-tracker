@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediSync — Clinical Pill Tracking & Adherence Intelligence</title>
+  <meta name="description" content="Intelligent medical adherence pill tracking, dosage schedule timeline, real-time audio reminders, compliance analytics, and doctor audit reports.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+/* ============================================================
+   MEDISYNC: Clinical Adherence & Pill Tracker Design System
+   High-end Dark Clinical Glassmorphism & Micro-animations
+   ============================================================ */
+
+:root {
+  --bg-base: #0a0f1d;
+  --bg-surface: rgba(18, 26, 47, 0.75);
+  --bg-surface-solid: #121a2f;
+  --bg-card: rgba(23, 33, 59, 0.7);
+  --bg-card-hover: rgba(29, 42, 74, 0.85);
+  --bg-glass-border: rgba(255, 255, 255, 0.08);
+  --bg-glass-border-hover: rgba(99, 102, 241, 0.35);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --color-primary: #3b82f6;
+  --color-primary-glow: rgba(59, 130, 246, 0.25);
+  --color-accent: #06b6d4;
+  --color-success: #10b981;
+  --color-success-glow: rgba(16, 185, 129, 0.25);
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-purple: #8b5cf6;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 24px var(--color-primary-glow);
+
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-base);
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.09) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App Container */
+.app-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 4rem;
+}
+
+/* -------------------------------------------------------------
+   Header & Live Status
+   ------------------------------------------------------------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.75rem;
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-logo-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.brand-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #ffffff 40%, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-success);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-success);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.25); }
+}
+
+.header-center-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.4rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.live-clock-time {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  letter-spacing: 0.04em;
+  color: #38bdf8;
+}
+
+.live-clock-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.audio-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--bg-glass-border);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.notif-badge-pill {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.notif-badge-pill.badge-disabled {
+  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.badge-active {
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+/* -------------------------------------------------------------
+   Metrics Overview Scoreboard
+   ------------------------------------------------------------- */
+.metrics-banner-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.metric-card {
+  background: var(--bg-surface);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--transition-base), border-color var(--transition-base);
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--bg-glass-border-hover);
+}
+
+/* Circular Gauge Card */
+.metric-card-gauge {
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gauge-svg-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+
+.gauge-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-9deg);
+}
+
+.gauge-bg-circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 9;
+}
+
+.gauge-progress-circle {
+  fill: none;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 339.29;
+  stroke-dashoffset: 30;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), stroke 0.5s ease;
+}
+
+.gauge-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.gauge-number {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.gauge-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.metric-info h4 {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.metric-streak-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.metric-today-progress {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 0.5rem;
+}
+
+.metric-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------
+   Alert Banner (Refills / Due)
+   ------------------------------------------------------------- */
+.alert-banner-bar {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  animation: slide-in 0.4s ease-out;
+}
+
+.alert-banner-bar.hidden {
+  display: none;
+}
+
+.alert-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: #fef3c7;
+}
+
+.alert-icon {
+  font-size: 1.3rem;
+}
+
+/* -------------------------------------------------------------
+   Navigation Tabs
+   ------------------------------------------------------------- */
+.nav-tabs-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(18, 26, 47, 0.6);
+  padding: 0.4rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--bg-glass-border);
+  margin-bottom: 1.75rem;
+  overflow-x: auto;
+}
+
+.nav-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-tab-btn.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(6, 182, 212, 0.85));
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.tab-section {
+  display: none;
+  animation: fade-in 0.3s ease-in-out;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------------------------------------------
+   Schedule Controls & Filter Chips
+   ------------------------------------------------------------- */
+.schedule-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-chips-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--bg-glass-border);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.filter-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 10px var(--color-primary-glow);
+}
+
+/* -------------------------------------------------------------
+   Dose Schedule Cards Grid
+   ------------------------------------------------------------- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+.dose-card {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.dose-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  opacity: 0.7;
+}
+
+.dose-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--bg-glass-border-hover);
+}
+
+/* Card State Modifiers */
+.dose-card.card-taken {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.dose-card.card-taken::before {
+  background: var(--color-success);
+}
+
+.dose-card.card-due {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.dose-card.card-due::before {
+  background: #38bdf8;
+  animation: pulse-bar 1.5s infinite;
+}
+
+.dose-card.card-skipped {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.2);
+  opacity: 0.85;
+}
+
+.dose-card.card-skipped::before {
+  background: var(--color-danger);
+}
+
+.dose-card.card-snoozed {
+  background: rgba(245, 158, 11, 0.07);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.dose-card.card-snoozed::before {
+  background: var(--color-warning);
+}
+
+@keyframes pulse-bar {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.dose-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.pill-visual {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.pill-form-icon {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.dose-header-details {
+  flex: 1;
+}
+
+.dose-time-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.dose-med-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.dose-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.badge-stock-low {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+.badge-stock-ok {
+  color: #86efac;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.dose-instructions {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.83rem;
+  color: #cbd5e1;
+  margin-bottom: 0.85rem;
+}
+
+.instruction-icon {
+  font-size: 0.95rem;
+}
+
+.dose-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+  font-size: 0.78rem;
+}
+
+.status-pill {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.status-taken {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-due {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.status-snoozed {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-skipped {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-pending {
+  background: rgba(148, 163, 184, 0.12);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.doctor-tag {
+  color: var(--text-muted);
+}
+
+/* Card Action Buttons */
+.dose-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: var(--transition-fast);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5);
+}
+
+.btn-action-take {
+  flex: 2;
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-action-take:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.45);
+}
+
+.btn-action-snooze {
+  flex: 1;
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.btn-action-snooze:hover {
+  background: rgba(245, 158, 11, 0.2);
+  color: #ffffff;
+}
+
+.btn-action-skip {
+  flex: 1;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-action-skip:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ffffff;
+}
+
+.btn-action-undo {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid var(--bg-glass-border);
+}
+
+.btn-action-undo:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--bg-glass-border);
+  color: var(--text-secondary);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-danger-outline {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.btn-danger-outline:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* -------------------------------------------------------------
+   Analytics Tab Section
+   ------------------------------------------------------------- */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.analytics-card {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.analytics-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.analytics-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 7-Day Bar Chart */
+.bar-chart-grid {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200px;
+  padding-top: 1.5rem;
+  gap: 0.75rem;
+}
+
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.bar-track {
+  width: 100%;
+  max-width: 44px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.bar-fill {
+  width: 100%;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bar-high {
+  background: linear-gradient(180deg, #10b981, #059669);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.bar-mid {
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+}
+
+.bar-low {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+}
+
+.bar-label {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.bar-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.bar-tooltip {
+  position: absolute;
+  top: -12px;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.bar-col:hover .bar-tooltip {
+  opacity: 1;
+}
+
+/* 30-Day Heatmap */
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.heat-cell {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.heat-cell:hover {
+  transform: scale(1.15);
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.heat-perfect {
+  background: rgba(16, 185, 129, 0.85);
+  color: #ffffff;
+}
+
+.heat-high {
+  background: rgba(16, 185, 129, 0.45);
+  color: #ffffff;
+}
+
+.heat-mid {
+  background: rgba(245, 158, 11, 0.5);
+  color: #ffffff;
+}
+
+.heat-low {
+  background: rgba(239, 68, 68, 0.55);
+  color: #ffffff;
+}
+
+.heat-none {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+/* Time Slot Compliance List */
+.timeslot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timeslot-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timeslot-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.timeslot-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.timeslot-val {
+  color: #38bdf8;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  border-radius: var(--radius-full);
+  transition: width 1s ease-out;
+}
+
+/* Badges Grid */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  transition: transform var(--transition-fast);
+}
+
+.achievement-card.badge-unlocked {
+  background: rgba(245, 158, 11, 0.07);
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15);
+}
+
+.achievement-icon {
+  font-size: 2rem;
+}
+
+.achievement-info h4 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.achievement-info p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+.achievement-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #f59e0b;
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+
+/* -------------------------------------------------------------
+   Pill Cabinet & Inventory Cards
+   ------------------------------------------------------------- */
+.med-cabinet-card {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base);
+}
+
+.med-cabinet-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--bg-glass-border-hover);
+}
+
+.med-cabinet-card.card-low-stock {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.04);
+}
+
+.cabinet-card-top {
+  display: flex;
+  gap: 1rem;
+}
+
+.category-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #38bdf8;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.cabinet-med-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cabinet-med-dosage {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.cabinet-schedule-times, .cabinet-instructions, .cabinet-doctor-info {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cabinet-doctor-info {
+  color: var(--text-muted);
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.75rem;
+}
+
+.stock-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.cabinet-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* -------------------------------------------------------------
+   History Audit Table & Filters
+   ------------------------------------------------------------- */
+.history-filters-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-surface);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--bg-glass-border);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.history-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.form-input, .form-select {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.85rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary-glow);
+}
+
+.history-table-wrapper {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-glass-border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.audit-table th {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.95rem 1.2rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  border-bottom: 1px solid var(--bg-glass-border);
+  white-space: nowrap;
+}
+
+.audit-table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.audit-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table-med-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* -------------------------------------------------------------
+   Modals
+   ------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-box {
+  background: var(--bg-surface-solid);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 540px;
+  box-shadow: var(--shadow-lg);
+  animation: modal-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+@keyframes modal-pop {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--bg-glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 1.5rem;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--bg-glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Form Styles */
+.form-group {
+  margin-bottom: 1.15rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.time-slot-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-icon-only {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: none;
+  cursor: pointer;
+}
+
+/* Real-Time Reminder Alert Modal Pulse */
+.alert-pulse-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.alert-pulse-ring::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+  animation: pulse-ring 1.8s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* -------------------------------------------------------------
+   Toasts & Confetti
+   ------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 1000;
+}
+
+.toast {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-lg);
+  color: #ffffff;
+  padding: 0.85rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  animation: toast-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toast-success {
+  border-left: 4px solid var(--color-success);
+}
+
+.toast-error {
+  border-left: 4px solid var(--color-danger);
+}
+
+.toast-info {
+  border-left: 4px solid var(--color-primary);
+}
+
+.toast-fadeout {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+@keyframes toast-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Confetti Celebration Particle */
+.confetti-particle {
+  position: fixed;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1001;
+  animation: confetti-explode 0.8s ease-out forwards;
+}
+
+@keyframes confetti-explode {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0.3) rotate(360deg); opacity: 0; }
+}
+
+/* -------------------------------------------------------------
+   Responsive Breakpoints
+   ------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .metrics-banner-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .metrics-banner-grid {
+    grid-template-columns: 1fr;
+  }
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .dose-card-actions {
+    flex-direction: column;
+  }
+  .btn-action-take, .btn-action-snooze, .btn-action-skip {
+    width: 100%;
+  }
+}
+
+/* -------------------------------------------------------------
+   Doctor Adherence Report Print Stylesheet
+   ------------------------------------------------------------- */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .app-header, .nav-tabs-wrapper, .history-filters-bar, .dose-card-actions, .header-controls {
+    display: none !important;
+  }
+  .tab-section {
+    display: block !important;
+  }
+  .audit-table th {
+    background: #f1f5f9 !important;
+    color: #000000 !important;
+  }
+  .audit-table td {
+    color: #000000 !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Top Application Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-logo-icon">💊</div>
+        <div>
+          <h1 class="brand-title">MediSync</h1>
+          <div class="brand-subtitle">
+            <span class="live-pulse-dot"></span> Clinical Adherence & Pill Tracker
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Clock & Date -->
+      <div class="header-center-clock">
+        <div id="live-clock-time" class="live-clock-time">--:--:--</div>
+        <div id="live-clock-date" class="live-clock-date">Loading date...</div>
+      </div>
+
+      <!-- Quick Action & Audio Reminders Controls -->
+      <div class="header-controls">
+        <button id="notif-permission-badge" class="notif-badge-pill" title="Click to enable desktop alerts">
+          🔔 Push Reminders: <span class="badge-active">Active</span>
+        </button>
+
+        <label class="audio-toggle-wrapper" title="Toggle audio chime on pill reminders">
+          <input type="checkbox" id="toggle-sound" checked>
+          <span>🔊 Audio Alerts</span>
+        </label>
+
+        <button id="btn-test-alarm" class="btn btn-sm btn-outline" title="Simulate an instant real-time pill alarm chime">
+          ⚡ Test Alarm
+        </button>
+
+        <button id="btn-open-add-med" class="btn btn-sm btn-primary">
+          + Add Medication
+        </button>
+      </div>
+    </header>
+
+    <!-- Connection Warning Banner (Shown if backend unreachable) -->
+    <div id="connection-warning-banner" class="alert-banner-bar hidden" role="alert"></div>
+
+    <!-- Top Adherence Scoreboard & Key Metrics -->
+    <section class="metrics-banner-grid" aria-label="Adherence Metrics Summary">
+      
+      <!-- Circular Compliance Gauge -->
+      <div class="metric-card metric-card-gauge">
+        <div class="gauge-svg-container">
+          <svg class="gauge-svg" viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="gauge-gradient-green" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="100%" stop-color="#06b6d4" />
+              </linearGradient>
+              <linearGradient id="gauge-gradient-amber" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f59e0b" />
+                <stop offset="100%" stop-color="#d97706" />
+              </linearGradient>
+              <linearGradient id="gauge-gradient-red" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ef4444" />
+                <stop offset="100%" stop-color="#b91c1c" />
+              </linearGradient>
+            </defs>
+            <circle class="gauge-bg-circle" cx="60" cy="60" r="54"></circle>
+            <circle id="gauge-progress-circle" class="gauge-progress-circle" cx="60" cy="60" r="54"></circle>
+          </svg>
+          <div class="gauge-center-text">
+            <div id="stat-overall-rate" class="gauge-number">--%</div>
+            <div class="gauge-label">Adherence</div>
+          </div>
+        </div>
+        <div class="metric-info">
+          <h4>Clinical Compliance</h4>
+          <div id="stat-rating-badge">
+            <span class="status-pill status-taken">Calculating...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adherence Streak Card -->
+      <div class="metric-card">
+        <div class="metric-info">
+          <h4>Active Compliance Streak</h4>
+          <div class="metric-streak-value">
+            <span>🔥</span>
+            <span id="stat-current-streak">0 Days</span>
+          </div>
+        </div>
+        <div class="metric-sub">
+          Best Record: <strong id="stat-best-streak" class="text-warning">0 Days</strong> unbroken
+        </div>
+      </div>
+
+      <!-- Today's Dose Progress Card -->
+      <div class="metric-card">
+        <div class="metric-info">
+          <h4>Today's Doses</h4>
+          <div id="today-progress-count" class="metric-today-progress">0 of 0 taken</div>
+          <div class="progress-track">
+            <div id="today-progress-fill" class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div id="today-due-badge" class="metric-sub" style="margin-top: 0.6rem;">
+          <span class="status-pill status-due">Checking schedule...</span>
+        </div>
+      </div>
+
+      <!-- Cumulative Dose Audit Summary -->
+      <div class="metric-card">
+        <div class="metric-info">
+          <h4>Intake Audit Log</h4>
+          <div style="font-size: 1.5rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.25rem;">
+            <span id="stat-total-taken" class="text-success">--</span> <span style="font-size: 0.9rem; color: var(--text-muted);">/ <span id="stat-total-scheduled">--</span> total doses</span>
+          </div>
+        </div>
+        <div class="metric-sub">
+          Continuous tamper-evident clinical record
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Low Stock Pill Refill Alert Banner -->
+    <div id="low-stock-alert-banner" class="alert-banner-bar hidden" role="alert">
+      <!-- Populated via JS -->
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <nav class="nav-tabs-wrapper" aria-label="Main Navigation">
+      <button class="nav-tab-btn active" data-target="tab-schedule">
+        <span>🕒</span> Today's Schedule
+      </button>
+      <button class="nav-tab-btn" data-target="tab-analytics">
+        <span>📊</span> Adherence Analytics & Insights
+      </button>
+      <button class="nav-tab-btn" data-target="tab-cabinet">
+        <span>💊</span> Pill Cabinet & Refills
+      </button>
+      <button class="nav-tab-btn" data-target="tab-history">
+        <span>📜</span> Audit History & Doctor Report
+      </button>
+    </nav>
+
+    <!-- =========================================================
+         TAB 1: TODAY'S SCHEDULE TIMELINE
+         ========================================================= -->
+    <section id="tab-schedule" class="tab-section active">
+      <div class="schedule-toolbar">
+        <div class="filter-chips-group">
+          <button class="filter-chip active" onclick="setScheduleFilter('all', this)">All Times</button>
+          <button class="filter-chip" onclick="setScheduleFilter('morning', this)">🌅 Morning (6am - 12pm)</button>
+          <button class="filter-chip" onclick="setScheduleFilter('afternoon', this)">☀️ Afternoon (12pm - 5pm)</button>
+          <button class="filter-chip" onclick="setScheduleFilter('evening', this)">🌆 Evening (5pm - 9pm)</button>
+          <button class="filter-chip" onclick="setScheduleFilter('night', this)">🌙 Night (9pm - 6am)</button>
+        </div>
+      </div>
+
+      <!-- Schedule Dosage Cards Container -->
+      <div id="schedule-cards-grid" class="cards-grid">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 2: ADHERENCE ANALYTICS & INSIGHTS
+         ========================================================= -->
+    <section id="tab-analytics" class="tab-section">
+      <div class="analytics-grid">
+        
+        <!-- 7-Day Compliance Trend Chart -->
+        <div class="analytics-card">
+          <div class="analytics-card-header">
+            <h3 class="analytics-card-title">📈 7-Day Compliance Trend</h3>
+            <span class="text-muted" style="font-size: 0.8rem;">Daily Percentage Taken</span>
+          </div>
+          <div id="chart-seven-days">
+            <!-- Rendered by analytics.js -->
+          </div>
+        </div>
+
+        <!-- Time-of-Day Compliance Breakdown -->
+        <div class="analytics-card">
+          <div class="analytics-card-header">
+            <h3 class="analytics-card-title">⏰ Time-of-Day Compliance</h3>
+          </div>
+          <div id="timeslot-compliance-container">
+            <!-- Rendered by analytics.js -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 30-Day Heatmap & Root Cause Analysis Grid -->
+      <div class="analytics-grid">
+        
+        <!-- 30-Day Adherence Calendar Heatmap -->
+        <div class="analytics-card">
+          <div class="analytics-card-header">
+            <h3 class="analytics-card-title">🗓️ 30-Day Compliance Calendar</h3>
+            <div style="display: flex; gap: 0.5rem; font-size: 0.72rem; align-items: center;">
+              <span style="color: #10b981;">■ 100%</span>
+              <span style="color: #34d399;">■ 80%+</span>
+              <span style="color: #f59e0b;">■ 50%+</span>
+              <span style="color: #ef4444;">■ &lt;50%</span>
+            </div>
+          </div>
+          <div id="heatmap-thirty-days">
+            <!-- Rendered by analytics.js -->
+          </div>
+        </div>
+
+        <!-- Reasons for Missed / Skipped Doses -->
+        <div class="analytics-card">
+          <div class="analytics-card-header">
+            <h3 class="analytics-card-title">💡 Missed & Skipped Dose Insights</h3>
+          </div>
+          <div id="skip-reasons-container">
+            <!-- Rendered by analytics.js -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Gamified Badges & Adherence Milestones -->
+      <div class="analytics-card" style="margin-top: 1.5rem;">
+        <div class="analytics-card-header">
+          <h3 class="analytics-card-title">🎖️ Adherence Milestones & Patient Badges</h3>
+        </div>
+        <div id="badges-container">
+          <!-- Rendered by analytics.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 3: PILL CABINET & INVENTORY
+         ========================================================= -->
+    <section id="tab-cabinet" class="tab-section">
+      <div class="schedule-toolbar">
+        <div>
+          <h2 style="font-size: 1.3rem; font-weight: 700;">Prescriptions & Supplements Inventory</h2>
+          <p class="text-muted" style="font-size: 0.85rem;">Manage active medications, prescription quantities, and refill thresholds.</p>
+        </div>
+        <button class="btn btn-primary" onclick="document.getElementById('btn-open-add-med').click()">
+          + Add New Prescription
+        </button>
+      </div>
+
+      <div id="medication-cards-grid" class="cards-grid">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 4: AUDIT HISTORY & DOCTOR REPORT
+         ========================================================= -->
+    <section id="tab-history" class="tab-section">
+      <div class="schedule-toolbar">
+        <div>
+          <h2 style="font-size: 1.3rem; font-weight: 700;">Medical Adherence Audit History</h2>
+          <p class="text-muted" style="font-size: 0.85rem;">Official chronological logs for clinical consultations and caregiver monitoring.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button id="btn-export-csv" class="btn btn-primary">
+            📥 Export Doctor CSV
+          </button>
+          <button id="btn-print-report" class="btn btn-outline">
+            🖨️ Print Clinical Summary
+          </button>
+        </div>
+      </div>
+
+      <!-- History Filtering Toolbar -->
+      <div class="history-filters-bar">
+        <div class="history-inputs">
+          <input type="text" id="history-search" class="form-input" placeholder="🔍 Search medicine, reason, notes..." style="min-width: 240px;">
+          
+          <select id="history-filter-status" class="form-select">
+            <option value="all">All Statuses</option>
+            <option value="taken">✓ Taken Only</option>
+            <option value="skipped">✕ Skipped / Held</option>
+            <option value="missed">⚠️ Missed Only</option>
+            <option value="snoozed">⏳ Snoozed</option>
+          </select>
+
+          <select id="history-filter-med" class="form-select">
+            <option value="">All Prescriptions & Supplements</option>
+            <!-- Populated via JS -->
+          </select>
+        </div>
+
+        <div id="history-count-badge" class="notif-badge-pill">
+          0 Logged Events
+        </div>
+      </div>
+
+      <!-- History Table -->
+      <div class="history-table-wrapper">
+        <table class="audit-table">
+          <thead>
+            <tr>
+              <th>Scheduled Date</th>
+              <th>Time</th>
+              <th>Medication & Dosage</th>
+              <th>Status</th>
+              <th>Actual Intake Time</th>
+              <th>Reason / Clinical Notes</th>
+              <th>Prescribing Physician</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body">
+            <!-- Rendered by app.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- =========================================================
+       MODAL 1: ADD MEDICATION MODAL
+       ========================================================= -->
+  <div id="add-med-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">💊 Add Prescription / Medication</h3>
+        <button class="modal-close-btn" onclick="closeAddMedModal()">&times;</button>
+      </div>
+      <form id="add-med-form">
+        <div class="modal-body">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="new-med-name">Medication Name *</label>
+              <input type="text" id="new-med-name" class="form-input" placeholder="e.g. Amoxicillin" required>
+            </div>
+            <div class="form-group">
+              <label for="new-med-dosage">Dosage *</label>
+              <input type="text" id="new-med-dosage" class="form-input" placeholder="e.g. 500 mg" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="new-med-form">Form</label>
+              <select id="new-med-form" class="form-select">
+                <option value="tablet">Tablet ⚪</option>
+                <option value="capsule">Capsule 💊</option>
+                <option value="softgel">Softgel 🟡</option>
+                <option value="liquid">Liquid 🧪</option>
+                <option value="inhaler">Inhaler 💨</option>
+                <option value="injection">Injection 💉</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="new-med-category">Category / Purpose</label>
+              <input type="text" id="new-med-category" class="form-input" placeholder="e.g. Antibiotic, Cardiology">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="new-med-color1">Primary Color</label>
+              <input type="color" id="new-med-color1" class="form-input" value="#3b82f6" style="height: 40px; padding: 2px;">
+            </div>
+            <div class="form-group">
+              <label for="new-med-color2">Secondary Color</label>
+              <input type="color" id="new-med-color2" class="form-input" value="#93c5fd" style="height: 40px; padding: 2px;">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Daily Scheduled Dose Times *</label>
+            <div id="time-slots-container">
+              <div class="time-slot-input-row">
+                <input type="time" class="form-input time-input" value="08:00" required>
+              </div>
+            </div>
+            <button type="button" id="btn-add-time-slot" class="btn btn-sm btn-outline" style="margin-top: 0.35rem;">
+              + Add Another Scheduled Time
+            </button>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="new-med-frequency">Frequency</label>
+              <select id="new-med-frequency" class="form-select">
+                <option value="Daily">Daily</option>
+                <option value="Twice daily">Twice daily</option>
+                <option value="Three times daily">Three times daily</option>
+                <option value="Every 8 hours">Every 8 hours</option>
+                <option value="As needed">As needed (PRN)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="new-med-stock">Starting Inventory (Doses)</label>
+              <input type="number" id="new-med-stock" class="form-input" value="30" min="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="new-med-instructions">Intake Instructions</label>
+            <input type="text" id="new-med-instructions" class="form-input" placeholder="e.g. Take with a large meal or glass of milk">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="new-med-threshold">Refill Warning Threshold</label>
+              <input type="number" id="new-med-threshold" class="form-input" value="7" min="1">
+            </div>
+            <div class="form-group">
+              <label for="new-med-doctor">Prescribing Doctor</label>
+              <input type="text" id="new-med-doctor" class="form-input" placeholder="e.g. Dr. Jennifer Vance">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="new-med-rx">Prescription # (Rx)</label>
+            <input type="text" id="new-med-rx" class="form-input" placeholder="e.g. RX-552910">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeAddMedModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Medication</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 2: SKIP REASON MODAL
+       ========================================================= -->
+  <div id="skip-reason-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Record Skipped Dose</h3>
+        <button class="modal-close-btn" onclick="closeSkipModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+          Logging clinical skip reason for <strong id="skip-modal-med-name" class="text-primary">Medication</strong>:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.25rem;">
+          <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer;">
+            <input type="radio" name="skip_reason" value="Stomach upset / nausea" checked>
+            <span>Stomach upset / nausea / side effects</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer;">
+            <input type="radio" name="skip_reason" value="Fasting for lab work / procedure">
+            <span>Fasting for medical test or lab procedure</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer;">
+            <input type="radio" name="skip_reason" value="Doctor advised temporary hold">
+            <span>Physician instructed temporary hold</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer;">
+            <input type="radio" name="skip_reason" value="Ran out of medication doses">
+            <span>Ran out of medication doses (Pending refill)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer;">
+            <input type="radio" name="skip_reason" value="Forgot / Away from home">
+            <span>Forgot / Away from medicine bottle</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="skip-reason-notes">Additional Patient / Clinical Notes</label>
+          <textarea id="skip-reason-notes" class="form-input" rows="2" placeholder="Optional notes for physician review..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeSkipModal()">Cancel</button>
+        <button type="button" class="btn btn-action-skip" onclick="confirmSkipDose()">Record Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 3: REAL-TIME REMINDER ALERT MODAL
+       ========================================================= -->
+  <div id="reminder-alert-modal" class="modal-overlay">
+    <div class="modal-box" style="text-align: center;">
+      <div class="modal-body" style="padding: 2.25rem 1.75rem;">
+        
+        <div class="alert-pulse-ring">
+          <div id="reminder-pill-icon" class="pill-visual" style="width: 64px; height: 64px; font-size: 2rem;">
+            💊
+          </div>
+        </div>
+
+        <span class="status-pill status-due animate-pulse" style="margin-bottom: 0.75rem;">
+          ⏰ MEDICATION DUE NOW
+        </span>
+
+        <h2 id="reminder-pill-name" style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-bottom: 0.2rem;">
+          Medication Name
+        </h2>
+        <div style="font-size: 1.1rem; color: #38bdf8; font-weight: 600; margin-bottom: 0.75rem;">
+          <span id="reminder-pill-dosage">Dosage</span> • Scheduled: <span id="reminder-pill-time">00:00</span>
+        </div>
+
+        <div class="dose-instructions" style="text-align: left; max-width: 400px; margin: 0 auto 1.75rem;">
+          <span class="instruction-icon">📋</span>
+          <span id="reminder-pill-instructions" class="instruction-text">Take with water</span>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-action-take" style="padding: 0.8rem 1.5rem; font-size: 1rem;" onclick="handleAlertModalTake()">
+            ✓ Take Dose Now
+          </button>
+          <button class="btn btn-action-snooze" style="padding: 0.8rem 1.2rem;" onclick="handleAlertModalSnooze(15)">
+            ⏳ Snooze 15m
+          </button>
+          <button class="btn btn-action-skip" style="padding: 0.8rem 1.2rem;" onclick="handleAlertModalSkip()">
+            ✕ Skip
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 4: QUICK REFILL MODAL
+       ========================================================= -->
+  <div id="refill-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Refill Pill Supply</h3>
+        <button class="modal-close-btn" onclick="closeRefillModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+          Restocking supply for <strong id="refill-med-name" class="text-primary">Medication</strong>
+          (Current inventory: <strong id="refill-current-stock">0</strong> doses).
+        </p>
+        <div class="form-group">
+          <label for="refill-quantity-input">Quantity to Add (e.g. 30-day or 90-day refill)</label>
+          <input type="number" id="refill-quantity-input" class="form-input" value="30" min="1" max="500">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeRefillModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="confirmRefillStock()">Update Stock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+    <!-- Scripts (supports both root and js/ folder paths) -->
+  <script src="audio.js" onerror="this.onerror=null;this.src='js/audio.js';"></script>
+  <script src="notifications.js" onerror="this.onerror=null;this.src='js/notifications.js';"></script>
+  <script src="analytics.js" onerror="this.onerror=null;this.src='js/analytics.js';"></script>
+  <script src="app.js" onerror="this.onerror=null;this.src='js/app.js';"></script>
+</body>
+</html>
